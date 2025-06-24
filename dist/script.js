@@ -55,3 +55,21 @@ if (localStorage.theme == 'dark' || (!('theme' in localStorage) && window.matchM
     }else {
         darkToggle.checked = false;
     }
+
+//tampilkan paragraf tambahan
+const toggleButton = document.querySelector('#toggle-button');
+const additionalText = document.querySelector('#additionalTexl');
+
+toggleButton.addEventListener('click', () => {
+    if(additionalText.classList.contains('max-h-0')) {
+        additionalText.classList.remove('max-h-0');
+        additionalText.style.maxHeight = additionalText.scrollHeight + 'px';
+        toggleButton.innerHTML = "sembunyikan";
+    } else {
+        additionalText.style.maxHeight = '0';
+        setTimeout(() => {
+        additionalText.classList.add('max-h-0');
+        toggleButton.innerHTML = "Lihat Selengkapnya";
+      }, 300);
+    }
+});
