@@ -73,3 +73,58 @@ toggleButton.addEventListener('click', () => {
       }, 300);
     }
 });
+
+
+// Form validation
+function handleSubmit(event) {
+    event.preventDefault(); // Mencegah pengiriman form default
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    let isValid = true;
+
+    if(!name) {
+        alert('Nama tidak boleh kosong');
+        isValid = false;
+    }
+    if(!email) {
+        alert('Email tidak boleh kosong');
+        isValid = false;
+    } else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!emailPattern.test(email)) {
+            alert('Email tidak valid');
+            isValid = false;
+        }
+    }
+    if(!message) {
+        alert('Pesan tidak boleh kosong');
+        isValid = false;
+    }
+
+    if(isValid){
+        //konfirmasi Emailjs
+
+        const templateParams = {
+            from_name: name,
+            to_name: email,
+            message: message,
+            reply_to: email
+        };
+
+        emailjs.init("x-vLtMYf9CmvsVxV5");
+
+        //service ID, template ID, dan template params
+        emailjs.send("service_k4vz9fg", "template_57lta1t", templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert('Pesan berhasil dikirim!');
+                document.getElementById('contact-form').reset(); // Reset form setelah pengiriman
+            }, function(error) {
+                console.error('FAILED...', error);
+                alert('Gagal mengirim pesan. Silakan coba lagi.');
+        });
+    }
+}
