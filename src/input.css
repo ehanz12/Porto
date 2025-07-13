@@ -29,3 +29,18 @@ body {
 #dark-toggle:checked ~ label div.toggle-circle {
     @apply translate-x-3;
 }
+
+@keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
