@@ -128,3 +128,5 @@ function handleSubmit(event) {
         });
     }
 }
+
+AOS.init();
